@@ -20,7 +20,7 @@ export const Album = () => {
         setAlbumName(doc.data().name);
       });
       return unmount
-  }, []);
+  }, [album]);
 
   return (
     <>
