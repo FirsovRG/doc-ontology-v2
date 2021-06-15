@@ -3,7 +3,9 @@
   height: 6rem;
   background-color: #eeeeee;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: 99;
+  position: absolute;
+  width: 100%;
 }
 
 .navLinks {

@@ -1,0 +1,49 @@
+.treeIerarchy {
+    background-color: #fff;
+    margin-top: 14px;
+    border: 1px solid #000;
+    padding: 14px;
+    font-size: 16px;
+}
+
+.directoryTitle {
+    display: flex;
+    align-items: center;
+}
+
+.directoryTitle > svg {
+    margin-right: 5px;
+}
+
+.directoryChildrens {
+    margin-left: 1.5rem;
+    display: none;
+    border-left: 1px solid #808080;
+    padding: 0.5rem 0 1rem 1.5rem;
+  }
+  
+  .directoryChildrensOpened {
+    display: block;
+  }
+
+  .documentsDirectory:not(:last-of-type) {
+      margin-bottom: 10px;
+  }
+
+  .itemTitle {
+      margin-left: 5px;
+      transition: 0.2s;
+      cursor: pointer;
+  }
+
+  .itemTitle:hover {
+      text-decoration: underline;
+  }
+
+  .selectedDir {
+      color: #b11818;
+  }
+
+  .icon {
+      cursor: pointer;
+  }

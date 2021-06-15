@@ -4,25 +4,24 @@ import cx from "classnames";
 import styles from "./DocumentsPage.module.css";
 import Workbench from "../../components/UI/Workbench";
 import { getDatabaseTree } from '../../actions';
+import { useDispatch, useSelector } from "react-redux";
+import { filesTreeSelector } from '../../store/selectors/filesTreeSelector';
 
 const DocumentsPage = () => {
   const [movable, setMovable] = useState(false);
   const [documentsListWidth, setDocumentsListWidth] = useState(300);
   const [activeDocument, setActiveDocument] = useState("");
-  const [documents, setDocuments] = useState([]);
+
+  const dispatch = useDispatch();
+  const {loading, tree: documents} = useSelector(filesTreeSelector);
 
   const handleResizeList = (event) => {
     setDocumentsListWidth(event.clientX + 5);
   };
 
   useEffect(() => {
-    async function getData () {
-      const result = await getDatabaseTree();
-      setDocuments(result)
-    }
-
-    getData();
-  }, [])
+    dispatch(getDatabaseTree());
+  }, [dispatch])
 
   return (
     <div
@@ -34,6 +33,7 @@ const DocumentsPage = () => {
         setMovable={(val) => setMovable(val)}
         listWidth={documentsListWidth}
         setActiveDocument={(docId) => setActiveDocument(docId)}
+        loading={loading}
       />
       <Workbench file={activeDocument} />
     </div>

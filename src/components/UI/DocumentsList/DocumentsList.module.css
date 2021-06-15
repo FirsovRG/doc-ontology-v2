@@ -27,6 +27,9 @@
 
 .listContent {
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .documentsDirectory {
@@ -57,8 +60,10 @@
 }
 
 .directoryChildrens {
-  margin-left: 2rem;
+  margin-left: 1.5rem;
   display: none;
+  border-left: 1px solid #808080;
+  padding-left: 0.5rem;
 }
 
 .directoryChildrensOpened {
@@ -69,7 +74,8 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
+
 }
 
 .documentItem svg {
@@ -85,4 +91,50 @@
 
 .documentItem:hover {
   color: #7d89f5;
+}
+
+.documentInfo {
+  max-width: 300px;
+}
+
+.documentName {
+  display: block;
+}
+
+.documentDate {
+  font-size: 10px;
+  color: #808080;
+}
+
+.addDocumentButtonWrapper {
+  margin-top: auto;
+}
+
+.addDocumentButton {
+  outline: none;
+  cursor: pointer;
+  border: 2px solid #bdbdbd;
+  color: #8a8a8a;
+  text-transform: uppercase;
+  height: 60px;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+.addDocumentButton > svg {
+  margin-right: 10px;
+  opacity: 0.3;
+}
+
+.addDocumentButton:hover {
+  background-color: #ccc;
+}
+
+.list {
+  overflow-y: auto;
 }

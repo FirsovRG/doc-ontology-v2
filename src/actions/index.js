@@ -1,92 +1,53 @@
 import firebase from "firebase";
 import { app } from "../base";
+import { getTreeRequestStart, getTreeRequestSuccess } from "../store/reducers/filesTreeReducer";
 
 const storage = firebase.storage(app);
 
 const prepareFileTree = async (ref) => {
     const tempTree = [];
+  
     const {prefixes, items} = await ref.listAll(); 
 
-    async function processPrefixes() {
-        for (const prefix of prefixes) {
-            const children = await prepareFileTree(prefix);
-            tempTree.push({
-                type: 'directory',
-                name: prefix.name,
-                children: children
-            })
-        }
+    async function directoryPrepare (prefix) {
+        const children = await prepareFileTree(prefix);
+        tempTree.push({
+            type: 'directory',
+            name: prefix.name,
+            children,
+            path: prefix.fullPath
+        })
+    }
 
-        for(const item of items) {
-            const itemUrl = await item.getDownloadURL();
-            const meta = await item.getMetadata();
+    async function documentPrepare (item) {
+        const itemUrl = await item.getDownloadURL();
+            const {contentType, timeCreated, updated} = await item.getMetadata();
             tempTree.push({
                 type: 'file',
                 name: item.name,
                 url: itemUrl,
-                contentType: meta.contentType
+                contentType: contentType,
+                timeCreated,
+                updated
             })
-        }
+    }
+
+    async function processPrefixes() {
+        
+        const prefixesPromises = prefixes.map(directoryPrepare);
+
+        const itemsPromises = items.map(documentPrepare);
+
+        await Promise.all([...prefixesPromises, ...itemsPromises]);
     }
 
     await processPrefixes();
-
-    // prefixes.forEach((folderRef) => {
-    //     (async () => {
-    //         const children = await prepareFileTree(folderRef);
-    //         tempTree.push({
-    //             type: 'directory',
-    //             name: folderRef.name,
-    //             children: children
-    //         })
-    //     })();
-    // })
-
-    
-    // items.forEach((itemRef) => {
-    //     (async () => {
-    //         const itemUrl = await itemRef.getDownloadURL();
-    //         tempTree.push({
-    //             type: 'file',
-    //             name: itemRef.name,
-    //             url: itemUrl
-    //         })
-    //     })();
-    // });
-
-    // ref.listAll().then((res) => {
-    //     res.prefixes.forEach((folderRef) => {
-    //         tempTree.push({
-    //             type: 'directory',
-    //             name: folderRef.name,
-    //             children: prepareFileTree(folderRef)
-    //         })
-    //       });
-    //     res.items.forEach((itemRef) => {
-    //         const itemUrl = itemRef.getDownloadURL().then((url) => (url));
-    //         tempTree.push({
-    //             type: 'file',
-    //             name: itemRef.name,
-    //             url: itemUrl
-    //         })
-    //     });
-    // })
-    return tempTree;
+    return tempTree.sort((a) => a.type !== 'directory' ? 1 : -1);
 }
 
-export const getDatabaseTree = async () => {
+export const getDatabaseTree = () => async (dispatch) => {
+    dispatch(getTreeRequestStart());
     const listRef = storage.ref('/');   
     const result = await prepareFileTree(listRef);
-    return result;
-}
-
-
-// export const getDatabaseTree = async () => {
-//   const response = await db.collection('documents').get();
-//   const tempTree = [];
-//   response.docs.forEach(item=>{
-//      tempTree.push(...tempTree, item.data())
-//   })
-
-//   return tempTree;
-// }
+    dispatch(getTreeRequestSuccess(result));
+  }

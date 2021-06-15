@@ -6,9 +6,13 @@ import { DirectoryIcon } from "../icons/directory";
 import { FileIcon } from "../icons/file";
 import cx from "classnames";
 import { useState } from "react";
+import {PlusIcon} from '../icons/plus';
+import AddDocumentModal from "../AddDocumentModal";
+import Loader from "../Loader";
 
-const DocumentsList = ({ items, setMovable, listWidth, setActiveDocument }) => {
+const DocumentsList = ({ loading, items, setMovable, listWidth, setActiveDocument }) => {
   const [openedDirs, setOpenedDirs] = useState([]);
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
   const renderDoc = (doc) => {
     if (doc.type === "directory") {
@@ -41,22 +45,33 @@ const DocumentsList = ({ items, setMovable, listWidth, setActiveDocument }) => {
               openedDirs.includes(doc.name) && styles.directoryChildrensOpened
             )}
           >
-            {doc.children.map((child) => renderDoc(child))}
+            {doc.children.map(renderDoc)}
           </ul>
         </li>
       );
     }
     return (
       <li key={doc.name} className={styles.documentItem} onClick={() => setActiveDocument(doc)}>
-        <FileIcon /> {doc.name}
+        <FileIcon />
+        <div className={styles.documentInfo}>
+          <span className={styles.documentName}>{doc.name}</span>
+          <span className={styles.documentDate}>{new Date(doc.updated).toLocaleString()}</span>
+        </div>
       </li>
     );
   };
   
   return (
+    <React.Fragment>
     <div className={styles.documentsList} style={{ width: `${listWidth}px` }}>
-      <div className={styles.listContent}>
-        {items && <ul>{items.map((item) => renderDoc(item))}</ul>}
+      {loading ? <Loader /> :<React.Fragment><div className={styles.listContent}>
+        {items && <ul className={styles.list}>{items.map(renderDoc)}</ul>}
+        <div className={styles.addDocumentButtonWrapper}>
+          <button className={styles.addDocumentButton} onClick={() => setIsModalOpened(true)}>
+            <PlusIcon />
+            Добавить документ
+          </button>
+        </div>
       </div>
       <div
         className={styles.draggableWrapper}
@@ -68,7 +83,10 @@ const DocumentsList = ({ items, setMovable, listWidth, setActiveDocument }) => {
           onMouseUp={() => setMovable(false)}
         />
       </div>
+      </React.Fragment>}
     </div>
+    <AddDocumentModal isOpen={isModalOpened} onClose={() => setIsModalOpened(false)}/>
+    </React.Fragment>
   );
 };
 
