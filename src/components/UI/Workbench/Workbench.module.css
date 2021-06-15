@@ -1,0 +1,99 @@
+.workbench {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.welcomeMessage {
+  opacity: 0.7;
+  margin-top: 2.5rem;
+  max-width: 50rem;
+}
+
+.welcomeTitle {
+  font-size: 3.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.welcomeBody {
+  font-size: 2.3rem;
+  text-align: justify;
+}
+
+.fileWrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.fileTitle {
+  height: 5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.8715861344537815) 0%,
+    rgba(0, 0, 0, 0.5494572829131652) 100%
+  );
+  color: #ffffff;
+  font-size: 1.4rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 99;
+  position: absolute;
+  opacity: 0.1;
+  transition: 0.3s;
+}
+
+.fileTitle:hover {
+  opacity: 0.8;
+}
+
+.title {
+  margin-left: 2rem;
+}
+
+.arrowButton {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.arrowButton path {
+  fill: #ffffff;
+}
+
+.arrowButton:disabled, .arrowButton:disabled path {
+  cursor: not-allowed;
+  fill: #1b1b1b;
+}
+
+.prevButton svg {
+  transform: scale(-1, 1);
+}
+
+.fileControls {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  height: 6rem;
+  background: linear-gradient(
+    360deg,
+    rgba(0, 0, 0, 0.8715861344537815) 0%,
+    rgba(0, 0, 0, 0.5494572829131652) 100%
+  );
+  color: #ffffff;
+  font-size: 1.4rem;
+  opacity: 0.1;
+  transition: 0.3s;
+}
+
+.fileControls:hover {
+  opacity: 0.8;
+}

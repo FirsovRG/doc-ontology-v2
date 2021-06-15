@@ -1,0 +1,57 @@
+.carouselWrapper {
+  position: relative;
+}
+
+.carouselViewWindow {
+  /* position: relative; */
+  overflow: hidden;
+}
+
+.carouselTrack {
+  display: flex;
+  align-items: center;
+  /* position: absolute; */
+}
+
+.carouselSlide {
+  display: none;
+}
+
+.activeSlide {
+  display: initial;
+  animation-name: fade;
+  animation-duration: 1s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.carouselDots {
+  margin-top: 2rem;
+}
+
+.dotsList {
+  display: flex;
+}
+
+.dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  margin: 0 0.5rem;
+  background-color: rgb(165, 165, 165);
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.activeDot {
+  background-color: #ffffff;
+  opacity: 1;
+}

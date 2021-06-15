@@ -5,7 +5,7 @@ import {app} from './base'
 const db = app.firestore()
 const storage = app.storage();
 
-export const NewPhoto = ({currentAlbum}) => {
+export const NewPhoto = ({currentAlbum = 'test1'}) => {
   const [file, setFile] = useState(null)
 
   const onFileChange = (e) => {
@@ -16,7 +16,7 @@ export const NewPhoto = ({currentAlbum}) => {
     const storageRef = storage.ref()
     const fileRef = storageRef.child(file.name)
     await fileRef.put(file)
-    db.collection("albums").doc(currentAlbum).update({
+    db.collection("documents").doc(currentAlbum).update({
       images: firebase.firestore.FieldValue.arrayUnion({
         name: file.name,
         url: await fileRef.getDownloadURL()

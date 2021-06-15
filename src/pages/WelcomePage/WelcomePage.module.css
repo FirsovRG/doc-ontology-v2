@@ -1,0 +1,51 @@
+.welcomePage {
+  height: 100%;
+  width: 100%;
+}
+
+.contentBackground {
+  background-image: url("/assets/images/WelcomeBackground.jpg");
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  opacity: 0.5;
+  background-position: center;
+  object-fit: cover;
+}
+
+.content {
+  height: 100%;
+}
+
+.welcomeCarousel {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5rem;
+  height: 100%;
+  align-items: center;
+}
+
+.bannerItem {
+  max-width: 50rem;
+  color: #2b2b2b;
+}
+
+.bannerTitle {
+  font-size: 4.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.bannerTitle:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 1.5rem solid #2b2b2b;
+  border-left: 1.5rem solid transparent;
+  position: absolute;
+  left: -2.5rem;
+}
+
+.bannerBody {
+  font-size: 2.4rem;
+}
