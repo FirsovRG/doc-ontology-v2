@@ -8,17 +8,20 @@
   opacity: 0.7;
   margin-top: 2.5rem;
   max-width: 50rem;
+
 }
 
 .welcomeTitle {
   font-size: 3.2rem;
   display: flex;
   justify-content: center;
+  font-weight: 400;
 }
 
 .welcomeBody {
-  font-size: 2.3rem;
+  font-size: 27px;
   text-align: justify;
+  font-weight: 200;
 }
 
 .fileWrapper {
