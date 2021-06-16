@@ -20,8 +20,9 @@ const DocumentsPage = () => {
   };
 
   useEffect(() => {
-    dispatch(getDatabaseTree());
-  }, [dispatch])
+    if (documents.length === 0){
+    dispatch(getDatabaseTree());}
+  }, [dispatch, documents.length])
 
   return (
     <div

@@ -124,6 +124,9 @@
   align-items: center;
   justify-content: center;
   transition: 0.5s;
+  font: inherit;
+  font-weight: 200;
+  margin-top: 14px;
 }
 
 .addDocumentButton > svg {
@@ -137,4 +140,34 @@
 
 .list {
   overflow-y: auto;
+}
+
+.controlsWrapper {
+  display: flex;
+  margin-bottom: 8px;
+  border: 1px solid rgb(140 140 140 / 50%);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.reloadButton {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  opacity: 0.4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.reloadButton:not(:last-of-type) {
+  margin-right: 10px;
+}
+
+.reloadButton:last-of-type {
+  margin-left: auto;
 }

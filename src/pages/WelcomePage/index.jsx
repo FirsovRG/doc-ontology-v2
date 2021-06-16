@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./WelcomePage.module.css";
 import Carousel from "../../components/UI/Carousel";
+import { NavLink } from "react-router-dom";
 
 const WelcomePage = () => {
   return (
@@ -33,6 +34,9 @@ const WelcomePage = () => {
               </div>
             </div>
           </Carousel>
+        <NavLink to='/documents' className={styles.beginButton}>
+          Начать
+        </NavLink>
         </div>
       </div>
     </div>

@@ -15,14 +15,17 @@
 
 .content {
   height: 100%;
+  display: flex;
 }
 
 .welcomeCarousel {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: center;
   margin-right: 5rem;
   height: 100%;
-  align-items: center;
+  align-items: flex-end;
+  margin-left: auto;
 }
 
 .bannerItem {
@@ -48,4 +51,22 @@
 
 .bannerBody {
   font-size: 2.4rem;
+}
+
+.beginButton {
+  align-self: flex-start;
+  margin-top: 32px;
+  border: 1px solid #797777;
+  font-size: 18px;
+  padding: 10px 24px;
+  color: #000;
+  border-radius: 4px;
+  z-index: 1;
+  font-weight: 100;
+  transition: 0.2s;
+  background-color: rgb(0 0 0 / 5%);
+}
+
+.beginButton:hover {
+  background-color: rgb(255 255 255 / 5%);
 }

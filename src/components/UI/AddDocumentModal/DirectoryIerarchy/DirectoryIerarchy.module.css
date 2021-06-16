@@ -4,6 +4,7 @@
     border: 1px solid #000;
     padding: 14px;
     font-size: 16px;
+    min-height: 300px;
 }
 
 .directoryTitle {

@@ -9,10 +9,16 @@ import { useState } from "react";
 import {PlusIcon} from '../icons/plus';
 import AddDocumentModal from "../AddDocumentModal";
 import Loader from "../Loader";
+import {RefreshIcon} from '../icons/refresh';
+import {CollapseIcon} from '../icons/collapse';
+import { useDispatch } from "react-redux";
+import {getDatabaseTree} from '../../../actions'
 
 const DocumentsList = ({ loading, items, setMovable, listWidth, setActiveDocument }) => {
   const [openedDirs, setOpenedDirs] = useState([]);
   const [isModalOpened, setIsModalOpened] = useState(false);
+
+  const dispatch = useDispatch();
 
   const renderDoc = (doc) => {
     if (doc.type === "directory") {
@@ -60,14 +66,33 @@ const DocumentsList = ({ loading, items, setMovable, listWidth, setActiveDocumen
       </li>
     );
   };
+
+  const handleOpenModal = () => {
+      setIsModalOpened(true)
+  }
+
+  const handleRefreshList = () => {
+    dispatch(getDatabaseTree());
+  }
   
   return (
     <React.Fragment>
     <div className={styles.documentsList} style={{ width: `${listWidth}px` }}>
       {loading ? <Loader /> :<React.Fragment><div className={styles.listContent}>
+        <div className={styles.controlsWrapper}>
+        <button className={styles.reloadButton} onClick={handleOpenModal}>
+            <PlusIcon />
+          </button>
+          <button className={styles.reloadButton} onClick={() => setOpenedDirs([])} >
+            <CollapseIcon />
+          </button>
+          <button className={styles.reloadButton} onClick={handleRefreshList}>
+            <RefreshIcon />
+          </button>
+        </div>
         {items && <ul className={styles.list}>{items.map(renderDoc)}</ul>}
         <div className={styles.addDocumentButtonWrapper}>
-          <button className={styles.addDocumentButton} onClick={() => setIsModalOpened(true)}>
+          <button className={styles.addDocumentButton} onClick={handleOpenModal}>
             <PlusIcon />
             Добавить документ
           </button>
