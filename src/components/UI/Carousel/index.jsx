@@ -25,7 +25,7 @@ const Carousel = ({ children }) => {
 
   useEffect(() => {
     setTimeout(nextSlide, 5000);
-  }, [activeSlide]);
+  }, [activeSlide, nextSlide]);
 
   return (
     <div className={styles.carouselWrapper}>
@@ -53,7 +53,6 @@ const Carousel = ({ children }) => {
                 styles.dot,
                 index === activeSlide && styles.activeDot
               )}
-              onClick={() => setActiveSlide(index)}
             />
           ))}
         </ul>
