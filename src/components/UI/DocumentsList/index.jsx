@@ -13,12 +13,28 @@ import {RefreshIcon} from '../icons/refresh';
 import {CollapseIcon} from '../icons/collapse';
 import { useDispatch } from "react-redux";
 import {getDatabaseTree} from '../../../actions'
+import Copyright from "../Copyright";
+import { DownloadIcon } from "../icons/download";
 
 const DocumentsList = ({ loading, items, setMovable, listWidth, setActiveDocument }) => {
   const [openedDirs, setOpenedDirs] = useState([]);
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [activeDoc, setActiveDoc] = useState(null);
 
   const dispatch = useDispatch();
+
+
+  const handleDownloadFile = () => {
+    if (activeDoc){
+    const link = document.createElement("a");
+    link.download = activeDoc.name;
+    link.setAttribute('download', activeDoc.name  )
+    link.setAttribute('target', '_blank'  )
+    link.href = activeDoc.url;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);}
+  }
 
   const renderDoc = (doc) => {
     if (doc.type === "directory") {
@@ -57,7 +73,7 @@ const DocumentsList = ({ loading, items, setMovable, listWidth, setActiveDocumen
       );
     }
     return (
-      <li key={doc.name} className={styles.documentItem} onClick={() => setActiveDocument(doc)}>
+      <li key={doc.name} className={styles.documentItem} onClick={() => {setActiveDocument(doc); setActiveDoc(doc)}}>
         <FileIcon />
         <div className={styles.documentInfo}>
           <span className={styles.documentName}>{doc.name}</span>
@@ -74,14 +90,18 @@ const DocumentsList = ({ loading, items, setMovable, listWidth, setActiveDocumen
   const handleRefreshList = () => {
     dispatch(getDatabaseTree());
   }
+
   
   return (
     <React.Fragment>
     <div className={styles.documentsList} style={{ width: `${listWidth}px` }}>
-      {loading ? <Loader /> :<React.Fragment><div className={styles.listContent}>
-        <div className={styles.controlsWrapper}>
+      <div className={styles.listContent}>
+      <div className={styles.controlsWrapper}>
         <button className={styles.reloadButton} onClick={handleOpenModal}>
             <PlusIcon />
+          </button>
+          <button className={styles.reloadButton} onClick={handleDownloadFile}>
+            <DownloadIcon />
           </button>
           <button className={styles.reloadButton} onClick={() => setOpenedDirs([])} >
             <CollapseIcon />
@@ -90,13 +110,14 @@ const DocumentsList = ({ loading, items, setMovable, listWidth, setActiveDocumen
             <RefreshIcon />
           </button>
         </div>
-        {items && <ul className={styles.list}>{items.map(renderDoc)}</ul>}
+        {loading ? <Loader /> : items && <ul className={styles.list}>{items.map(renderDoc)}</ul>}
         <div className={styles.addDocumentButtonWrapper}>
           <button className={styles.addDocumentButton} onClick={handleOpenModal}>
             <PlusIcon />
             Добавить документ
           </button>
         </div>
+        <Copyright />
       </div>
       <div
         className={styles.draggableWrapper}
@@ -108,7 +129,7 @@ const DocumentsList = ({ loading, items, setMovable, listWidth, setActiveDocumen
           onMouseUp={() => setMovable(false)}
         />
       </div>
-      </React.Fragment>}
+      
     </div>
     <AddDocumentModal isOpen={isModalOpened} onClose={() => setIsModalOpened(false)}/>
     </React.Fragment>

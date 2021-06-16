@@ -1664,6 +1664,16 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
+"@jorbdur/react-doc-viewer@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@jorbdur/react-doc-viewer/-/react-doc-viewer-0.1.6.tgz#7739343ac02da3b40c826e29d4f00390c12d8eda"
+  integrity sha512-j82u3ddNqVLTGyXQXXr9ztJD/HXP8qwpYB2vpd3gB00bVz3+nNETaqK3/BOKS5FmMZ59qntjY17GqNR42EhCQg==
+  dependencies:
+    pdfjs-dist "2.4.456"
+    react-pdf "5.0.0"
+    styled-components "^5.1.1"
+    wl-msg-reader "^0.2.0"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"

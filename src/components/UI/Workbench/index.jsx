@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
-import DocViewer, { DocViewerRenderers } from "react-doc-viewer";
+import DocViewer, { DocViewerRenderers } from "@jorbdur/react-doc-viewer";
 import styles from "./Workbench.module.css";
 
 
 const Workbench = React.memo(({ file }) => {
-  
+
   const docs = useMemo(() => [
     { uri: file.url, fileType: file.contentType }
   ], [file]) ;
@@ -12,13 +12,7 @@ const Workbench = React.memo(({ file }) => {
   return (
     <div className={styles.workbench}>
       {file ? (
-        <DocViewer documents={docs} pluginRenderers={DocViewerRenderers} config={{
-          header: {
-           disableHeader: false,
-           disableFileName: false,
-           retainURLParams: false
-          }
-         }}
+        <DocViewer documents={docs} pluginRenderers={DocViewerRenderers}
          style={{width: '100%'}}
          />
       ) : (
