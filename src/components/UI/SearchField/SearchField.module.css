@@ -1,0 +1,22 @@
+.searchFieldWrapper {
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    transition: 0.2s;
+}
+
+.opened {
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.searchField {
+    background-color: transparent;
+    border: 1px solid rgb(140 140 140 / 50%);
+    border-radius: 4px;
+    height: 25px;
+    width: 100%;
+    align-self: flex-end;
+    padding-left: 8px;
+}

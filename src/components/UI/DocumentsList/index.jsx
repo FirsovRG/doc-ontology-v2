@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./DocumentsList.module.css";
 import { DirOpen } from "../icons/dirOpen";
 import { DirClose } from "../icons/dirClose";
@@ -15,14 +15,39 @@ import { useDispatch } from "react-redux";
 import {getDatabaseTree} from '../../../actions'
 import Copyright from "../Copyright";
 import { DownloadIcon } from "../icons/download";
+import { SearchPlusIcon } from "../icons/searchPlus";
+import SearchField from "../SearchField";
+import useDebounce from "../../../hooks/useDebounce";
+import { searchFiles } from "../../../utils/search";
+import { SearchMinusIcon } from "../icons/searchMinus";
 
 const DocumentsList = ({ loading, items, setMovable, listWidth, setActiveDocument }) => {
   const [openedDirs, setOpenedDirs] = useState([]);
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [activeDoc, setActiveDoc] = useState(null);
+  const [ isSearchOpen, setIsSearchOpen ] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState(items);
+
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+  useEffect(
+    () => {
+      if (debouncedSearchTerm) {
+        const result = searchFiles(debouncedSearchTerm, items);
+        setResults(result);
+      } else {
+        setResults(items);
+      }
+    },
+    [debouncedSearchTerm, items]
+  );
 
   const dispatch = useDispatch();
 
+  const toggleSearchOpen = () => {
+    setIsSearchOpen(!isSearchOpen)
+  }
 
   const handleDownloadFile = () => {
     if (activeDoc){
@@ -106,11 +131,15 @@ const DocumentsList = ({ loading, items, setMovable, listWidth, setActiveDocumen
           <button className={styles.reloadButton} onClick={() => setOpenedDirs([])} >
             <CollapseIcon />
           </button>
+          <button className={styles.reloadButton} onClick={toggleSearchOpen}>
+            {isSearchOpen ? <SearchMinusIcon/> :<SearchPlusIcon />}
+          </button>
           <button className={styles.reloadButton} onClick={handleRefreshList}>
             <RefreshIcon />
           </button>
         </div>
-        {loading ? <Loader /> : items && <ul className={styles.list}>{items.map(renderDoc)}</ul>}
+        <SearchField isOpen={isSearchOpen} value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)}/>
+        {loading ? <Loader /> : results && <ul className={styles.list}>{results.map(renderDoc)}</ul>}
         <div className={styles.addDocumentButtonWrapper}>
           <button className={styles.addDocumentButton} onClick={handleOpenModal}>
             <PlusIcon />
