@@ -13,13 +13,14 @@ export const Album = () => {
   const { album } = match.params;
 
   useEffect(() => {
-    const unmount = db.collection("albums")
+    const unmount = db
+      .collection("albums")
       .doc(album)
       .onSnapshot((doc) => {
         setImages(doc.data().images || []);
         setAlbumName(doc.data().name);
       });
-      return unmount
+    return unmount;
   }, [album]);
 
   return (
@@ -27,7 +28,9 @@ export const Album = () => {
       <section>
         <header>
           <h1>{albumName}</h1>
-          <p>Go to the <Link to="/">Home page</Link></p>
+          <p>
+            Go to the <Link to="/">Home page</Link>
+          </p>
         </header>
         {images.map((image) => (
           <aside key={image.name}>

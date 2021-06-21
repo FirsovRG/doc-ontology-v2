@@ -9,7 +9,9 @@ const Header = () => (
         <img src="/assets/images/logo.png" alt="logo" />
       </div>
       <h1 className={styles.title}>
-          Система<br/>документов
+        Система
+        <br />
+        документов
       </h1>
     </NavLink>
     <ul className={styles.navLinks}>

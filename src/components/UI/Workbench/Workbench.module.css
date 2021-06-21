@@ -8,7 +8,6 @@
   opacity: 0.7;
   margin-top: 2.5rem;
   max-width: 50rem;
-
 }
 
 .welcomeTitle {
@@ -70,7 +69,8 @@
   fill: #ffffff;
 }
 
-.arrowButton:disabled, .arrowButton:disabled path {
+.arrowButton:disabled,
+.arrowButton:disabled path {
   cursor: not-allowed;
   fill: #1b1b1b;
 }

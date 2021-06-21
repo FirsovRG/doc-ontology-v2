@@ -25,18 +25,16 @@ const WelcomePage = () => {
               </div>
             </div>
             <div className={styles.bannerItem}>
-              <div className={styles.bannerTitle}>
-                Унификация
-              </div>
+              <div className={styles.bannerTitle}>Унификация</div>
               <div className={styles.bannerBody}>
                 Сделайте работу с документами вашей организации удобнее для
                 каждого сотрудника
               </div>
             </div>
           </Carousel>
-        <NavLink to='/documents' className={styles.beginButton}>
-          Начать
-        </NavLink>
+          <NavLink to="/documents" className={styles.beginButton}>
+            Начать
+          </NavLink>
         </div>
       </div>
     </div>

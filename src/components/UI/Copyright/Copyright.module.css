@@ -1,24 +1,24 @@
 .copyright {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    bottom: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 4px;
 }
 
 .link > svg {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 .author {
-    color: #737373;
-    font-weight: 200;
-    font-size: 14px;
-    margin-right: 8px;
+  color: #737373;
+  font-weight: 200;
+  font-size: 14px;
+  margin-right: 8px;
 }
 
 .link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

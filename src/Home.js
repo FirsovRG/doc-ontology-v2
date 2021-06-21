@@ -1,10 +1,10 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import {NewAlbumForm} from './NewAlbumForm'
+import React from "react";
+import { Link } from "react-router-dom";
+import { NewAlbumForm } from "./NewAlbumForm";
 
-export const Home = ({albums}) => {
-
-  return <>
+export const Home = ({ albums }) => {
+  return (
+    <>
       <section>
         {albums.map((album) => (
           <Link to={`/${album.id}`}>
@@ -18,5 +18,6 @@ export const Home = ({albums}) => {
       <footer>
         <NewAlbumForm />
       </footer>
-  </>
-}
+    </>
+  );
+};
